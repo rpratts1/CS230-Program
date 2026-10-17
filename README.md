@@ -2,38 +2,95 @@
 
 ## About This Repository
 
-This repository contains selected work from CS 230: Operating Platforms. The course focused on operating systems, software architecture, memory and storage management, distributed systems, networking, security, and software design.
+This repository contains selected work from CS 230: Operating Platforms.
 
-## Project Reflection
+The course focused on operating systems, software architecture, memory and storage management, distributed systems, networking, security, and software design.
 
-During this course, I worked with The Gaming Room scenario and helped design recommendations for expanding the Draw It or Lose It application to multiple operating platforms.
+This repository is organized using the following folders:
 
-One of the main things I learned was how operating system choices can affect software performance, security, storage, memory, and scalability. I also learned how distributed systems allow clients on different platforms to communicate with a central server through technologies such as REST APIs.
+- `docs` - software design documents and written project artifacts
+- `src` - Java source code and programming files
+- `assets` - images, diagrams, screenshots, and other supporting files
 
-I improved my understanding of Linux as a server platform and how it can support Java applications, networking, file systems, memory management, and security. I also learned the importance of least privilege, internal permission checks, HTTPS, role-based access, backups, monitoring, and layered security.
+## My Work in CS 230
 
-The project helped me understand how software design decisions must connect directly to a client's needs and technical requirements.
+Throughout this course, I worked with a client scenario involving The Gaming Room and its game, Draw It or Lose It.
 
-## Artifacts
+The main goal was to help The Gaming Room expand the application so it could support multiple operating platforms while remaining reliable, secure, and scalable.
+
+I worked with Java, REST API concepts, operating system architecture, memory management, storage management, distributed systems, networking, and application security.
+
+## What I Learned
+
+One of the biggest lessons I learned was that choosing an operating system affects many other parts of software design.
+
+For example, the server platform affects:
+
+- performance
+- memory management
+- file storage
+- networking
+- security
+- scalability
+- application compatibility
+
+I also learned how Linux can be used as a server platform for Java applications and how a REST-based client-server design can allow Windows, macOS, Linux, Android, and iOS clients to communicate with the same server.
+
+Another important lesson was security. I learned that security should be built into the application from the beginning. This includes authentication, authorization, role-based access, least privilege, HTTPS, internal permission checks, firewalls, monitoring, and backups.
+
+## Project Artifacts
 
 ### Project Two: Software Design Document
-This artifact includes recommendations for operating platforms, storage, memory, distributed systems, and security for The Gaming Room.
+
+Project Two focused on evaluating different operating platforms and creating recommendations for The Gaming Room.
+
+The document includes discussions of:
+
+- operating platforms
+- memory and storage
+- distributed systems
+- security
+- software design decisions
 
 [View Project Two](./docs/CS230_Project_Two_Software_Design_Document.docx)
 
 ### Project Three: Software Design Recommendations
-This artifact contains my final recommendations for the Draw It or Lose It application, including Linux server architecture, storage management, memory management, distributed systems, networking, and security.
+
+Project Three contains my final architecture recommendations for Draw It or Lose It.
+
+I recommended Linux as the primary server platform and explained how the application could use:
+
+- Linux server architecture
+- SSD and cloud storage
+- virtual memory and caching
+- REST APIs
+- distributed client-server communication
+- load balancing
+- HTTPS and TLS
+- role-based authorization
+- least privilege
+- monitoring and backups
 
 [View Project Three](./docs/CS230-Module7-Project_Three-Software_Design_Recommendations.docx)
 
 ## Skills Demonstrated
 
-- Operating system analysis
-- Linux server architecture
-- Memory and storage management
+- Java programming
+- Linux server concepts
+- Operating system architecture
+- Memory management
+- Storage management
 - Distributed systems
-- REST API concepts
 - Networking
-- Security and access control
-- Software design documentation
-- Technical recommendations
+- REST APIs
+- Application security
+- Technical documentation
+- Software design recommendations
+
+## Reflection
+
+CS 230 helped me understand how software design, operating systems, and security work together.
+
+Before this course, I mainly thought about whether an application could run successfully. I now understand that a good software design must also consider how the application will scale, how data will be stored, how memory will be managed, how users will connect, and how the system will remain secure.
+
+These projects gave me experience creating technical recommendations based on a client's requirements and explaining those recommendations in a professional software design document.
