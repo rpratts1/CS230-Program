@@ -187,17 +187,23 @@ The `gameauth` project includes:
 - Maven dependency management
 - Application configuration
 
-    Module-4
-    ├── CS 230 Module Four Journal.docx
-    ├── CS230_Project_Software_Design.docx
-    └── gameauth
-        ├── README.md
-        ├── config.yml
-        ├── pom.xml
-        └── src
-            └── main
-                ├── java
-                └── resources
+    ```text
+Module-4
+├── CS 230 Module Four Journal.docx
+├── CS230_Project_Software_Design.docx
+└── gameauth
+    ├── README.md
+    ├── config.yml
+    ├── pom.xml
+    └── src
+        └── main
+            ├── java
+            │   └── com
+            │       └── gamingroom
+            │           └── gameauth
+            └── resources
+                └── banner.txt
+```
 
 [![View Module Four Journal](https://img.shields.io/badge/View-Module_Four_Journal-2B579A?style=for-the-badge&logo=microsoftword&logoColor=white)](./Module-4/CS%20230%20Module%20Four%20Journal.docx)
 
