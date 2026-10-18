@@ -1,1 +1,9 @@
 .DS_Store
+
+# Java, Maven, and Eclipse generated files
+target/
+*.class
+.classpath
+.project
+.settings/
+dependency-reduced-pom.xml
