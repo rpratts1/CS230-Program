@@ -683,9 +683,11 @@ Before this course, I mainly focused on whether the code worked. I now understan
 
 The Gaming Room project helped me understand how software requirements can be translated into a complete system architecture. It also showed me that there is not always one correct technology for every situation.
 
-Traditional operating systems, cloud platforms, containers, and serverless computing all have strengths and limitations. A good software design requires understanding those differences and selecting the technology that best matches the needs of the application.
+Traditional operating systems, cloud platforms, containers, and serverless computing all have strengths and limitations. I learned that a good software design should select technologies based on the needs of each part of the application. Some workloads may work best on a traditional or cloud-hosted server, while event-driven tasks may be better suited for serverless computing.
 
-Going forward, I will use what I learned in CS 230 to think about software as a complete system instead of focusing only on the source code.
+I also learned that moving an application to the cloud does not remove the need for security, monitoring, or good software design. Developers still have responsibilities for areas such as authentication, authorization, data protection, and secure application configuration.
+
+Going forward, I will use what I learned in CS 230 to think about software as a complete system instead of focusing only on the source code. I will also consider performance, security, scalability, cost, and the needs of the user when deciding which architecture is the best fit for an application.
 
 ---
 
