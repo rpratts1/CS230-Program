@@ -437,6 +437,9 @@ Using several security controls together provides stronger protection than depen
 ![Git](https://img.shields.io/badge/Git-Version_Control-F05032?style=flat-square&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-181717?style=flat-square&logo=github&logoColor=white)
 ![SSH](https://img.shields.io/badge/SSH-Secure_Authentication-4D4D4D?style=flat-square)
+![Cloud Computing](https://img.shields.io/badge/Cloud-Computing-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
+![Serverless](https://img.shields.io/badge/Serverless-Computing-FD5750?style=flat-square&logo=serverless&logoColor=white)
+
 
 </p>
 
@@ -466,6 +469,8 @@ Skills demonstrated throughout the course include:
 - Git version control
 - GitHub repository management
 - SSH authentication
+- Cloud computing
+- Serverless computing
 
 ---
 
@@ -570,15 +575,117 @@ Example GitHub SSH remote:
 
 ---
 
-# Reflection
+# CS 230 Portfolio Reflection
 
-CS 230 helped me better understand how software development, operating systems, networking, storage, and security work together.
+## Briefly summarize The Gaming Room client and their software requirements. Who was the client? What type of software did they want you to design?
 
-Before this course, I mainly thought about whether an application could run successfully. I now understand that good software design must also consider how an application will scale, how data will be stored, how memory will be managed, how users will connect, and how the system will remain secure.
+The client for this project was The Gaming Room. The company had an existing Android game called Draw It or Lose It and wanted to expand the application so it could support additional operating platforms.
 
-The Gaming Room projects gave me experience analyzing client requirements and turning those requirements into technical software design recommendations.
+The game needed to support multiple games, teams, and players while making sure that each game, team, and player had a unique name. The Gaming Room also needed the application to be reliable, secure, scalable, and accessible from different types of devices.
 
-I also gained more experience using Java, Eclipse, Maven, REST APIs, Git, GitHub, SSH, Linux concepts, object-oriented programming, distributed systems, and application security practices that I can apply to future software development and IT projects.
+My role was to help design a software solution that could support Windows, macOS, Linux, Android, and iOS clients while using a centralized server architecture.
+
+---
+
+## What did you do particularly well in developing this documentation?
+
+One area I believe I did particularly well was connecting the client's software requirements to specific technical recommendations.
+
+Instead of only describing different technologies, I explained how they could be used for Draw It or Lose It. For example, I recommended Linux as the main server platform because of its stability, security, Java support, and ability to scale.
+
+I also connected the security recommendations to the work I completed in the Module 4 `gameauth` project. That included authentication, authorization, role-based access control, and the use of `@RolesAllowed` to protect application resources.
+
+I also believe I did well explaining memory management, storage, networking, distributed systems, and security in relation to the actual needs of The Gaming Room.
+
+---
+
+## What about the process of working through a design document did you find helpful when developing the code?
+
+Working through the software design document helped me think about the entire application before focusing only on the Java code.
+
+The design document made me consider questions such as:
+
+- Which operating system should host the application?
+- How will users communicate with the server?
+- How will memory and storage be managed?
+- How will the application scale?
+- How will users be authenticated and authorized?
+- How will the application remain secure?
+
+This helped me better understand why classes, inheritance, design patterns, REST APIs, authentication, and authorization were being used in the programming assignments.
+
+Instead of seeing each programming task as a separate assignment, I could see how the different parts worked together as one complete software system.
+
+---
+
+## If you could choose one part of your work on these documents to revise, what would you pick? How would you improve it?
+
+If I could revise one part of my work, I would add more specific technical details to the operating system architecture, storage management, memory management, and security sections.
+
+For the Linux architecture section, I would add information about Linux using a monolithic kernel with loadable modules, the Completely Fair Scheduler, and its POSIX-based user environment.
+
+For storage management, I would identify a specific Linux file system such as ext4 and explain how journaling, RAID, backups, and replication could improve reliability.
+
+For memory management, I would add more information about demand paging, swap space, page cache, copy-on-write, and Linux out-of-memory management.
+
+I would also strengthen the security section by discussing Linux-specific security controls such as SELinux or AppArmor, certificate management, input validation, and rate limiting.
+
+These additions would make the recommendations more specific and provide more technical detail about how the Linux server would actually operate.
+
+---
+
+## How did you interpret the user's needs and implement them into your software design? Why is it so important to consider the user's needs when designing?
+
+I interpreted the client's needs by first identifying what the application needed to accomplish from the user's point of view.
+
+The Gaming Room wanted Draw It or Lose It to support multiple games, teams, and players while preventing duplicate names. The company also wanted the application to work across several platforms instead of being limited to Android.
+
+These requirements influenced the software design. The Java application used unique identifiers and checks to prevent duplicate games, teams, and players. I also recommended a REST-based client-server architecture so different client devices could communicate with the same centralized server.
+
+Considering the user's needs is important because software should solve the client's actual problem. A technically advanced application is not useful if it does not meet the requirements of the people or organization that will use it.
+
+Understanding user requirements also helps developers make better decisions about performance, security, compatibility, scalability, and usability.
+
+---
+
+## How did you approach designing software? What techniques or strategies would you use in the future to analyze and design a similar software application?
+
+My approach was to begin with the client's requirements and then break the application into smaller technical areas.
+
+I looked at:
+
+- Class structure
+- Operating platform
+- Memory management
+- Storage management
+- Networking
+- Distributed systems
+- Security
+- Scalability
+
+I examined each area separately and then considered how they would work together as one complete application.
+
+I also used object-oriented programming concepts such as inheritance and encapsulation, the Singleton design pattern, UML class diagrams, REST APIs, authentication, and role-based security.
+
+In the future, I would continue using a requirements-first approach. I would begin by identifying the business and user requirements, create diagrams of the system, determine the responsibilities of each component, evaluate possible platforms, and identify security and scalability requirements before development begins.
+
+I would also compare traditional servers, cloud services, containers, and serverless technologies to determine which approach is best for each part of an application.
+
+Instead of automatically choosing one technology for the entire system, I would consider a hybrid design when it could provide better performance, scalability, security, reliability, or cost control.
+
+---
+
+## Final Reflection
+
+CS 230 changed the way I think about software development.
+
+Before this course, I mainly focused on whether the code worked. I now understand that application development also involves operating systems, memory, storage, networking, security, scalability, and the environment where the application will run.
+
+The Gaming Room project helped me understand how software requirements can be translated into a complete system architecture. It also showed me that there is not always one correct technology for every situation.
+
+Traditional operating systems, cloud platforms, containers, and serverless computing all have strengths and limitations. A good software design requires understanding those differences and selecting the technology that best matches the needs of the application.
+
+Going forward, I will use what I learned in CS 230 to think about software as a complete system instead of focusing only on the source code.
 
 ---
 
