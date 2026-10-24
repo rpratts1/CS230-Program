@@ -683,7 +683,7 @@ Before this course, I mainly focused on whether the code worked. I now understan
 
 The Gaming Room project helped me understand how software requirements can be translated into a complete system architecture. It also showed me that there is not always one correct technology for every situation.
 
-Traditional operating systems, cloud platforms, containers, and serverless computing all have strengths and limitations. I learned that a good software design should select technologies based on the needs of each part of the application. Some workloads may work best on a traditional or cloud-hosted server, while event-driven tasks may be better suited for serverless computing.
+Traditional operating systems, cloud platforms, containers, and serverless computing all have strengths and limitations. I learned that good software design means selecting technologies based on the needs of each part of the application. Some workloads may work best on a traditional or cloud-hosted server, while event-driven tasks may be better suited for serverless computing.
 
 I also learned that moving an application to the cloud does not remove the need for security, monitoring, or good software design. Developers still have responsibilities for areas such as authentication, authorization, data protection, and secure application configuration.
 
