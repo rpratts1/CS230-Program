@@ -302,6 +302,8 @@ The final recommendations included:
 - Software updates
 - Backups
 
+As a follow-up to these recommendations, I would also evaluate specific cloud services when designing a production version of the application. Examples include Amazon S3 for image and object storage, Amazon CloudFront for delivering static content closer to users, and AWS Lambda for event-driven or background processing tasks.
+
 [![View Project Three](https://img.shields.io/badge/View-Project_Three-0078D4?style=for-the-badge&logo=microsoftword&logoColor=white)](./Module-7/CS230-Module7-Project_Three-Software_Design_Recommendations.docx)
 
 ---
@@ -321,58 +323,11 @@ The project required me to evaluate six major areas:
 
 My recommendation was to use Linux as the primary production server platform while allowing clients using Windows, macOS, Linux, Android, and iOS to communicate with the application through a browser-based REST architecture.
 
+A future cloud-based implementation could extend this architecture by using specific services for different responsibilities. Amazon S3 could provide scalable object storage for game images and other static files. Amazon CloudFront could act as a content delivery network to distribute those files closer to users. AWS Lambda could support serverless event-driven tasks that do not require a continuously running server.
+
+These services would not necessarily replace the Linux application server. Instead, they could be used as part of a hybrid architecture in which the Linux server handles real-time game sessions and application logic while cloud and serverless services handle workloads that are better suited to them.
+
 [![Project Three Software Design Recommendations](https://img.shields.io/badge/Project_Three-Software_Design_Recommendations-0078D4?style=for-the-badge&logo=microsoftword&logoColor=white)](./Module-7/CS230-Module7-Project_Three-Software_Design_Recommendations.docx)
-
----
-
-# Security Architecture
-
-One of the most important lessons from CS 230 was that security should be designed into an application from the beginning.
-
-Security should not exist only at the login screen or network boundary.
-
-The application should also perform internal authorization and permission checks when users attempt to access protected functionality.
-
-A layered security model can include:
-
-    User
-      │
-      ▼
-    Authentication
-      │
-      ▼
-    Authorization
-      │
-      ▼
-    Role-Based Access Control
-      │
-      ▼
-    Internal Permission Checks
-      │
-      ▼
-    Application Resources
-      │
-      ▼
-    Encrypted Communication
-      │
-      ▼
-    Monitoring + Backups + Updates
-
-This defense-in-depth approach provides stronger protection than depending on a single security control.
-
-Important security concepts covered during the course included:
-
-- Authentication
-- Authorization
-- Role-based access control
-- Least privilege
-- HTTPS
-- TLS
-- Internal permission checks
-- Firewalls
-- Software updates
-- Monitoring
-- Backups
 
 ---
 
@@ -380,23 +335,93 @@ Important security concepts covered during the course included:
 
 The Gaming Room can use a client-server architecture similar to the following:
 
-    Windows Client ──────┐
-    macOS Client ────────┤
-    Linux Client ────────┤
-    Android Client ──────┤
-    iOS Client ──────────┤
-                         ▼
-                     REST API
-                         │
-                         ▼
-                   Linux Server
-                         │
-              ┌──────────┼──────────┐
-              ▼          ▼          ▼
-        Authentication  Game     Data Storage
-            Service     Logic
+```text
+Windows Client ──────┐
+macOS Client ────────┤
+Linux Client ────────┤
+Android Client ──────┤
+iOS Client ──────────┤
+                     ▼
+                  REST API
+                     │
+                     ▼
+               Linux Server
+                     │
+          ┌──────────┼──────────┐
+          ▼          ▼          ▼
+   Authentication   Game    Persistent Data
+       Service      Logic
+```
 
 This architecture allows multiple client platforms to communicate with the same centralized application server.
+
+A future hybrid cloud architecture could expand the design:
+
+```text
+Windows / macOS / Linux / Android / iOS
+                     │
+                     ▼
+                  REST API
+                     │
+                     ▼
+               Linux Server
+                     │
+        ┌────────────┼────────────┐
+        ▼            ▼            ▼
+   Game Logic    Database    AWS Lambda
+                                  │
+                           Event-Driven Tasks
+
+                     │
+                     ▼
+                 Amazon S3
+              Image / Object Storage
+                     │
+                     ▼
+             Amazon CloudFront
+             Content Delivery
+```
+
+In this example:
+
+- AWS Lambda could perform event-driven tasks such as image processing, notifications, completed-game processing, or scheduled jobs.
+- Amazon S3 could store game images, static files, backups, or other objects.
+- Amazon CloudFront could distribute images and static content through a content delivery network so users can retrieve them from locations closer to them.
+
+The real-time portion of the game could continue running on the Linux application server because interactive game sessions may require consistent response times. Serverless functions would be better suited for tasks that occur after an event or do not require a continuously running process.
+
+---
+
+# Cloud and Serverless Architecture Examples
+
+One lesson from Module 8 was that it is useful to identify actual technologies instead of discussing cloud computing only in general terms.
+
+The following AWS services are examples of technologies I would evaluate when designing a future cloud-based version of Draw It or Lose It:
+
+| Service | Category | Possible Use |
+| --- | --- | --- |
+| AWS Lambda | Serverless / Function as a Service | Event-driven processing, notifications, image processing, scheduled jobs, and completed-game processing |
+| Amazon S3 | Object Storage | Game images, static files, backups, and other application objects |
+| Amazon CloudFront | Content Delivery Network | Distributing images and static content closer to users to improve performance |
+
+These services would be selected based on the application's requirements rather than simply because they are cloud technologies.
+
+For example, AWS Lambda may be useful for workloads that only need to execute when an event occurs. Amazon S3 would be more appropriate for storing objects such as game images than using the main application server's local file system for everything. Amazon CloudFront could then distribute those images more efficiently to users in different locations.
+
+The choice would also need to consider:
+
+- Performance
+- Security
+- Scalability
+- Reliability
+- Cost
+- Data transfer and egress costs
+- Provider dependence
+- Monitoring
+- Authentication and authorization
+- Availability requirements
+
+This reinforces the idea that there is not one correct platform for every part of an application.
 
 ---
 
@@ -422,26 +447,13 @@ Security should be designed into an application from the beginning rather than a
 
 Using several security controls together provides stronger protection than depending on only one security layer.
 
+Module 8 also helped me understand that cloud computing should not be discussed only as one general technology. Different cloud services are designed for different responsibilities. For example, AWS Lambda can provide serverless event-driven processing, Amazon S3 can provide scalable object storage, and Amazon CloudFront can provide content delivery.
+
+I also learned that moving an application to the cloud does not automatically make the application less expensive or remove the need for an operating system. Cloud services still require planning around cost, security, monitoring, permissions, storage, networking, and application design.
+
 ---
 
 # Skills Demonstrated
-
-<p align="center">
-
-![Java](https://img.shields.io/badge/Java-Programming-437291?style=flat-square&logo=openjdk&logoColor=white)
-![OOP](https://img.shields.io/badge/Object--Oriented-Programming-blue?style=flat-square)
-![UML](https://img.shields.io/badge/UML-Class_Diagrams-orange?style=flat-square)
-![REST](https://img.shields.io/badge/REST-APIs-009688?style=flat-square)
-![Maven](https://img.shields.io/badge/Maven-Build_Tools-C71A36?style=flat-square&logo=apachemaven&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-Server-FCC624?style=flat-square&logo=linux&logoColor=black)
-![Git](https://img.shields.io/badge/Git-Version_Control-F05032?style=flat-square&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-Portfolio-181717?style=flat-square&logo=github&logoColor=white)
-![SSH](https://img.shields.io/badge/SSH-Secure_Authentication-4D4D4D?style=flat-square)
-![Cloud Computing](https://img.shields.io/badge/Cloud-Computing-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
-![Serverless](https://img.shields.io/badge/Serverless-Computing-FD5750?style=flat-square&logo=serverless&logoColor=white)
-
-
-</p>
 
 Skills demonstrated throughout the course include:
 
@@ -469,184 +481,15 @@ Skills demonstrated throughout the course include:
 - Git version control
 - GitHub repository management
 - SSH authentication
-- Cloud computing
-- Serverless computing
-
----
-
-# Development Tools
-
-## Java
-
-[![Java](https://img.shields.io/badge/OpenJDK-Java-437291?style=for-the-badge&logo=openjdk&logoColor=white)](https://openjdk.org/)
-
-Java was used throughout the course for object-oriented programming, application development, REST services, and software design exercises.
-
----
-
-## Eclipse IDE
-
-[![Eclipse](https://img.shields.io/badge/Eclipse-IDE-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white)](https://www.eclipse.org/ide/)
-
-Eclipse was used to create, edit, run, test, and debug Java projects.
-
----
-
-## Apache Maven
-
-[![Maven](https://img.shields.io/badge/Apache-Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)](https://maven.apache.org/)
-
-Maven was used in the Module 4 `gameauth` project to manage dependencies and build the Java application.
-
----
-
-## Git
-
-[![Git](https://img.shields.io/badge/Git-Version_Control-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/)
-
-Git is used to track changes throughout this repository.
-
----
-
-## GitHub
-
-[![GitHub](https://img.shields.io/badge/GitHub-CS230--Program-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rpratts1/CS230-Program)
-
-GitHub is used to maintain the CS 230 portfolio and preserve the development history of the coursework.
-
----
-
-## Visual Studio Code
-
-[![VS Code](https://img.shields.io/badge/Visual_Studio_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://code.visualstudio.com/)
-
-Visual Studio Code is used for Git repository management, Markdown editing, file organization, and source code review.
-
----
-
-## Microsoft Word
-
-[![Microsoft Word](https://img.shields.io/badge/Microsoft-Word-2B579A?style=for-the-badge&logo=microsoftword&logoColor=white)](https://www.microsoft.com/microsoft-365/word)
-
-Microsoft Word was used to prepare software design documents, journal assignments, and technical recommendations.
-
----
-
-## Linux
-
-[![Linux](https://img.shields.io/badge/Linux-Server-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://www.linux.org/)
-
-Linux was evaluated as the recommended production server platform for The Gaming Room application.
-
----
-
-## macOS
-
-[![macOS](https://img.shields.io/badge/macOS-Development-000000?style=for-the-badge&logo=apple&logoColor=white)](https://www.apple.com/macos/)
-
-macOS was used as one of my primary development environments for Git, GitHub, Java, Eclipse, Visual Studio Code, and SSH.
-
----
-
-## SSH
-
-[![OpenSSH](https://img.shields.io/badge/OpenSSH-Secure_Authentication-4D4D4D?style=for-the-badge)](https://www.openssh.com/)
-
-SSH authentication is used to securely connect this development environment to GitHub without entering a GitHub password for every push.
-
----
-
-# Git and GitHub Workflow
-
-This repository uses Git for local version control and GitHub for remote repository hosting.
-
-A typical workflow used during this portfolio setup was:
-
-    git status
-    git add .
-    git commit -m "Commit message"
-    git push
-
-The repository uses SSH authentication with GitHub.
-
-Example GitHub SSH remote:
-
-    git@github.com:rpratts1/CS230-Program.git
+- Cloud computing concepts
+- Serverless computing concepts
+- Cloud object storage concepts
+- Content delivery network concepts
+- Hybrid cloud architecture
 
 ---
 
 # CS 230 Portfolio Reflection
-
-## Briefly summarize The Gaming Room client and their software requirements. Who was the client? What type of software did they want you to design?
-
-The client for this project was The Gaming Room. The company had an existing Android game called Draw It or Lose It and wanted to expand the application so it could support additional operating platforms.
-
-The game needed to support multiple games, teams, and players while making sure that each game, team, and player had a unique name. The Gaming Room also needed the application to be reliable, secure, scalable, and accessible from different types of devices.
-
-My role was to help design a software solution that could support Windows, macOS, Linux, Android, and iOS clients while using a centralized server architecture.
-
----
-
-## What did you do particularly well in developing this documentation?
-
-One area I believe I did particularly well was connecting the client's software requirements to specific technical recommendations.
-
-Instead of only describing different technologies, I explained how they could be used for Draw It or Lose It. For example, I recommended Linux as the main server platform because of its stability, security, Java support, and ability to scale.
-
-I also connected the security recommendations to the work I completed in the Module 4 `gameauth` project. That included authentication, authorization, role-based access control, and the use of `@RolesAllowed` to protect application resources.
-
-I also believe I did well explaining memory management, storage, networking, distributed systems, and security in relation to the actual needs of The Gaming Room.
-
----
-
-## What about the process of working through a design document did you find helpful when developing the code?
-
-Working through the software design document helped me think about the entire application before focusing only on the Java code.
-
-The design document made me consider questions such as:
-
-- Which operating system should host the application?
-- How will users communicate with the server?
-- How will memory and storage be managed?
-- How will the application scale?
-- How will users be authenticated and authorized?
-- How will the application remain secure?
-
-This helped me better understand why classes, inheritance, design patterns, REST APIs, authentication, and authorization were being used in the programming assignments.
-
-Instead of seeing each programming task as a separate assignment, I could see how the different parts worked together as one complete software system.
-
----
-
-## If you could choose one part of your work on these documents to revise, what would you pick? How would you improve it?
-
-If I could revise one part of my work, I would add more specific technical details to the operating system architecture, storage management, memory management, and security sections.
-
-For the Linux architecture section, I would add information about Linux using a monolithic kernel with loadable modules, the Completely Fair Scheduler, and its POSIX-based user environment.
-
-For storage management, I would identify a specific Linux file system such as ext4 and explain how journaling, RAID, backups, and replication could improve reliability.
-
-For memory management, I would add more information about demand paging, swap space, page cache, copy-on-write, and Linux out-of-memory management.
-
-I would also strengthen the security section by discussing Linux-specific security controls such as SELinux or AppArmor, certificate management, input validation, and rate limiting.
-
-These additions would make the recommendations more specific and provide more technical detail about how the Linux server would actually operate.
-
----
-
-## How did you interpret the user's needs and implement them into your software design? Why is it so important to consider the user's needs when designing?
-
-I interpreted the client's needs by first identifying what the application needed to accomplish from the user's point of view.
-
-The Gaming Room wanted Draw It or Lose It to support multiple games, teams, and players while preventing duplicate names. The company also wanted the application to work across several platforms instead of being limited to Android.
-
-These requirements influenced the software design. The Java application used unique identifiers and checks to prevent duplicate games, teams, and players. I also recommended a REST-based client-server architecture so different client devices could communicate with the same centralized server.
-
-Considering the user's needs is important because software should solve the client's actual problem. A technically advanced application is not useful if it does not meet the requirements of the people or organization that will use it.
-
-Understanding user requirements also helps developers make better decisions about performance, security, compatibility, scalability, and usability.
-
----
 
 ## How did you approach designing software? What techniques or strategies would you use in the future to analyze and design a similar software application?
 
@@ -667,11 +510,15 @@ I examined each area separately and then considered how they would work together
 
 I also used object-oriented programming concepts such as inheritance and encapsulation, the Singleton design pattern, UML class diagrams, REST APIs, authentication, and role-based security.
 
-In the future, I would continue using a requirements-first approach. I would begin by identifying the business and user requirements, create diagrams of the system, determine the responsibilities of each component, evaluate possible platforms, and identify security and scalability requirements before development begins.
+In the future, I would continue using a requirements-first approach. I would begin by identifying the business and user requirements, creating diagrams of the system, determining the responsibilities of each component, evaluating possible platforms, and identifying security and scalability requirements before development begins.
 
 I would also compare traditional servers, cloud services, containers, and serverless technologies to determine which approach is best for each part of an application.
 
-Instead of automatically choosing one technology for the entire system, I would consider a hybrid design when it could provide better performance, scalability, security, reliability, or cost control.
+Instead of discussing cloud services only in general terms, I would identify specific technologies and determine what responsibility each service could have. For example, I could evaluate AWS Lambda for event-driven processing, Amazon S3 for object and image storage, and Amazon CloudFront for content delivery.
+
+I would not automatically choose one technology for the entire system. I would consider a hybrid design when it could provide better performance, scalability, security, reliability, or cost control.
+
+For Draw It or Lose It, this could mean using a Linux-based application server for real-time game sessions and REST APIs while using AWS Lambda for selected background tasks, Amazon S3 for image storage, and Amazon CloudFront for distributing static content.
 
 ---
 
@@ -683,11 +530,15 @@ Before this course, I mainly focused on whether the code worked. I now understan
 
 The Gaming Room project helped me understand how software requirements can be translated into a complete system architecture. It also showed me that there is not always one correct technology for every situation.
 
-Traditional operating systems, cloud platforms, containers, and serverless computing all have strengths and limitations. I learned that good software design means selecting technologies based on the needs of each part of the application. Some workloads may work best on a traditional or cloud-hosted server, while event-driven tasks may be better suited for serverless computing.
+Traditional operating systems, cloud platforms, containers, and serverless computing all have strengths and limitations. I learned that good software design means selecting technologies based on the needs of each part of the application.
 
-I also learned that moving an application to the cloud does not remove the need for security, monitoring, or good software design. Developers still have responsibilities for areas such as authentication, authorization, data protection, and secure application configuration.
+I also learned that it is important to name and evaluate specific technologies instead of discussing cloud computing only in general terms. For example, AWS Lambda could be used for event-driven serverless processing, Amazon S3 could provide scalable object storage, and Amazon CloudFront could distribute static content to users.
 
-Going forward, I will use what I learned in CS 230 to think about software as a complete system instead of focusing only on the source code. I will also consider performance, security, scalability, cost, and the needs of the user when deciding which architecture is the best fit for an application.
+These services could work alongside a traditional Linux application server rather than replacing it completely. A hybrid architecture could allow the Linux server to handle real-time game logic while cloud services handle storage, content delivery, and selected event-driven workloads.
+
+I also learned that moving an application to the cloud does not automatically make it cheaper or remove the need for security, monitoring, or good software design. Developers must still consider authentication, authorization, data protection, permissions, networking, cost, and application performance.
+
+Going forward, I will use what I learned in CS 230 to think about software as a complete system instead of focusing only on the source code. I will also consider specific technologies, performance, security, scalability, reliability, cost, and the needs of the user when deciding which architecture is the best fit for an application.
 
 ---
 
